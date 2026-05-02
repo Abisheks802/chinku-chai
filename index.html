@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chinku Chai — Asli Assam. Seedha Ghar Tak.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f5ede0;
+  --cream2: #ede0cc;
+  --parchment: #f9f3ea;
+  --brown-deep: #2a1a0e;
+  --brown: #4a2c14;
+  --brown-mid: #7a4a28;
+  --brown-light: #b07040;
+  --gold: #c8943a;
+  --gold-light: #deb86a;
+  --forest: #2d4a2a;
+  --forest-mid: #3d6438;
+  --sage: #6b8f5e;
+  --sage-light: #a8c49a;
+  --rust: #c05c2a;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Jost', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--parchment);
+  color: var(--brown-deep);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, width 0.2s, height 0.2s;
+  mix-blend-mode: multiply;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transition: all 0.25s ease;
+  opacity: 0.6;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── TICKER ── */
+.ticker {
+  background: var(--forest);
+  overflow: hidden;
+  padding: 9px 0;
+  position: relative;
+  z-index: 10;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: tickerMove 35s linear infinite;
+}
+.ticker-track span {
+  font-size: 11px;
+  color: var(--sage-light);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+.ticker-track span::before { content: '✦'; color: var(--gold); font-size: 8px; }
+@keyframes tickerMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ── NAVBAR ── */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  height: 72px;
+  background: rgba(249,243,234,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(74,44,20,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo-mark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-decoration: none;
+}
+.logo-mark .chinku {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--brown-deep);
+  letter-spacing: -0.5px;
+}
+.logo-mark .chai {
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 12.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--brown-mid);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.25s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover { color: var(--brown-deep); }
+.nav-links a:hover::after { width: 100%; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-cart {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--brown-mid);
+  cursor: pointer;
+  font-weight: 500;
+}
+.btn-order {
+  background: var(--forest);
+  color: var(--sage-light);
+  border: none;
+  padding: 10px 24px;
+  font-size: 11.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.25s, transform 0.15s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-order:hover { background: var(--forest-mid); transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 92vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  position: relative;
+  overflow: hidden;
+}
+.hero-left {
+  padding: 100px 60px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.eyebrow-line { width: 40px; height: 1px; background: var(--gold); }
+.eyebrow-text {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(52px, 6vw, 84px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -1px;
+  color: var(--brown-deep);
+  margin-bottom: 10px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--forest);
+}
+.hero-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--brown-light);
+  margin-bottom: 28px;
+  letter-spacing: 0.5px;
+}
+.hero-desc {
+  font-size: 15px;
+  color: var(--brown-mid);
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: 44px;
+  font-weight: 300;
+}
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--brown-deep);
+  color: var(--cream);
+  padding: 15px 36px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s;
+}
+.btn-primary:hover { background: var(--brown); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(42,26,14,0.25); }
+.btn-secondary {
+  background: transparent;
+  color: var(--brown-mid);
+  padding: 15px 28px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  border: 1px solid rgba(74,44,20,0.25);
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--brown-deep); }
+.hero-badges {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.hero-badge {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hero-badge .num {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--brown-deep);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.hero-badge .label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--brown-light);
+  font-weight: 500;
+}
+.badge-divider { width: 1px; background: rgba(74,44,20,0.15); align-self: stretch; margin: 4px 0; }
+
+/* HERO RIGHT */
+.hero-right {
+  position: relative;
+  overflow: hidden;
+  background: var(--forest);
+}
+.hero-bg-pattern {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(45,74,42,0.9) 0%, var(--forest) 70%),
+    linear-gradient(135deg, var(--brown-deep) 0%, var(--forest) 100%);
+}
+.hero-visual-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 48px;
+  gap: 20px;
+}
+.tea-vessel {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 35% 35%, rgba(200,148,58,0.3), transparent 60%),
+              radial-gradient(ellipse at center, rgba(45,74,42,0.6), rgba(27,50,25,0.9));
+  border: 1px solid rgba(200,148,58,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 90px;
+  animation: gentleFloat 5s ease-in-out infinite;
+  box-shadow: 0 0 80px rgba(200,148,58,0.12), 0 24px 64px rgba(0,0,0,0.4);
+  position: relative;
+}
+.tea-vessel::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,148,58,0.15);
+  animation: rotate 20s linear infinite;
+}
+@keyframes rotate { to { transform: rotate(360deg); } }
+@keyframes gentleFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.origin-tag {
+  background: rgba(200,148,58,0.12);
+  border: 1px solid rgba(200,148,58,0.3);
+  color: var(--gold-light);
+  padding: 10px 20px;
+  border-radius: 3px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  text-align: center;
+}
+.origin-tag span { display: block; font-family: var(--font-serif); font-size: 16px; font-weight: 300; font-style: italic; letter-spacing: 0.5px; text-transform: none; color: rgba(245,237,224,0.7); margin-top: 3px; }
+.freshness-tag {
+  background: rgba(27,50,25,0.8);
+  border: 1px solid rgba(107,143,94,0.3);
+  color: var(--sage-light);
+  padding: 10px 20px;
+  border-radius: 3px;
+  font-size: 11.5px;
+  letter-spacing: 1px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── DIVIDER ── */
+.ornament-divider {
+  text-align: center;
+  padding: 12px 0;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 6px;
+}
+
+/* ── ORIGIN STRIP ── */
+.origin-strip {
+  background: var(--brown-deep);
+  padding: 28px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.origin-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.origin-item .icon { font-size: 22px; }
+.origin-item .text .top { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+.origin-item .text .bottom { font-size: 11px; color: rgba(245,237,224,0.5); margin-top: 2px; letter-spacing: 0.5px; }
+.origin-sep { width: 1px; height: 36px; background: rgba(200,148,58,0.2); }
+
+/* ── SECTION BASE ── */
+.section { position: relative; z-index: 1; }
+.section-head { margin-bottom: 64px; }
+.section-head.centered { text-align: center; }
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10.5px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.section-label.centered { justify-content: center; }
+.section-label .line { width: 30px; height: 1px; background: var(--gold); }
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--brown-deep);
+  letter-spacing: -0.5px;
+}
+.section-title em { font-style: italic; color: var(--forest); }
+.section-desc {
+  font-size: 15px;
+  color: var(--brown-mid);
+  line-height: 1.8;
+  font-weight: 300;
+  margin-top: 16px;
+  max-width: 580px;
+}
+.section-desc.centered { margin: 16px auto 0; text-align: center; }
+
+/* ── SHOP ── */
+.shop-section {
+  padding: 100px 60px;
+  background: var(--parchment);
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.product-card {
+  background: var(--cream);
+  border: 1px solid rgba(74,44,20,0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(42,26,14,0.15);
+}
+.product-card:hover .product-thumb { transform: scale(1.05); }
+.product-img {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+.product-thumb {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
+}
+.product-img.assam-ctc { background: linear-gradient(135deg, #3d2a10 0%, #6b3a18 100%); }
+.product-img.assam-orth { background: linear-gradient(135deg, #2d4a2a 0%, #4a7240 100%); }
+.product-img.dooars-green { background: linear-gradient(135deg, #1a3d1a 0%, #3d7a3a 100%); }
+.product-img.darjeeling { background: linear-gradient(135deg, #4a3020 0%, #8a6040 100%); }
+.product-badge-wrap {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.product-badge {
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.badge-top { background: var(--gold); color: var(--brown-deep); }
+.badge-fresh { background: var(--forest); color: var(--sage-light); }
+.badge-new { background: var(--rust); color: #fff; }
+.product-body { padding: 20px; }
+.product-region {
+  font-size: 9.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.product-name {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--brown-deep);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.product-desc {
+  font-size: 12.5px;
+  color: var(--brown-mid);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  font-weight: 300;
+}
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.product-price {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--brown-deep);
+}
+.product-price .per { font-size: 11px; color: var(--brown-light); font-weight: 300; font-family: var(--font-sans); }
+.btn-add {
+  background: var(--forest);
+  color: var(--sage-light);
+  border: none;
+  padding: 9px 18px;
+  font-size: 10.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-add:hover { background: var(--forest-mid); }
+.product-tags { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+.product-tag {
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--brown-light);
+  border: 1px solid rgba(176,112,64,0.25);
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+/* ── STORY ── */
+.story-section {
+  padding: 100px 60px;
+  background: var(--brown-deep);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.story-section::before {
+  content: '"';
+  position: absolute;
+  top: -40px;
+  left: 40px;
+  font-family: var(--font-serif);
+  font-size: 400px;
+  color: rgba(200,148,58,0.04);
+  line-height: 1;
+  pointer-events: none;
+}
+.story-label { color: var(--gold); }
+.story-title { color: var(--cream); }
+.story-title em { color: var(--gold-light); }
+.story-body {
+  font-size: 15px;
+  color: rgba(245,237,224,0.65);
+  line-height: 1.9;
+  font-weight: 300;
+  margin-top: 20px;
+}
+.story-body p + p { margin-top: 16px; }
+.story-body strong { color: var(--cream); font-weight: 500; }
+.story-right { display: flex; flex-direction: column; gap: 20px; }
+.story-card {
+  background: rgba(245,237,224,0.05);
+  border: 1px solid rgba(200,148,58,0.15);
+  border-radius: 6px;
+  padding: 24px;
+  transition: border-color 0.25s;
+}
+.story-card:hover { border-color: rgba(200,148,58,0.4); }
+.story-card .sc-icon { font-size: 28px; margin-bottom: 10px; }
+.story-card h4 { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
+.story-card p { font-size: 13px; color: rgba(245,237,224,0.55); line-height: 1.7; font-weight: 300; }
+.story-card .sc-detail { font-size: 11px; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; font-weight: 600; }
+
+/* ── HOW IT WORKS ── */
+.how-section {
+  padding: 100px 60px;
+  background: var(--cream2);
+}
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 64px;
+  position: relative;
+}
+.steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 40px; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), var(--gold), transparent);
+  opacity: 0.3;
+}
+.step-card {
+  padding: 0 32px;
+  border-right: 1px solid rgba(74,44,20,0.1);
+  position: relative;
+}
+.step-card:last-child { border-right: none; }
+.step-num {
+  font-family: var(--font-serif);
+  font-size: 72px;
+  font-weight: 700;
+  color: rgba(200,148,58,0.12);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.step-icon { font-size: 32px; margin-bottom: 16px; }
+.step-card h4 { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--brown-deep); margin-bottom: 10px; }
+.step-card p { font-size: 13.5px; color: var(--brown-mid); line-height: 1.7; font-weight: 300; }
+
+/* ── FRESHNESS BANNER ── */
+.freshness-section {
+  padding: 80px 60px;
+  background: var(--forest);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.freshness-title { font-family: var(--font-serif); font-size: clamp(28px,4vw,46px); font-weight: 700; color: var(--cream); letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 20px; }
+.freshness-title em { color: var(--gold-light); font-style: italic; }
+.freshness-body { font-size: 15px; color: rgba(245,237,224,0.65); line-height: 1.8; font-weight: 300; margin-bottom: 32px; }
+.freshness-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+.freshness-pill {
+  background: rgba(245,237,224,0.08);
+  border: 1px solid rgba(200,148,58,0.25);
+  color: var(--gold-light);
+  padding: 8px 16px;
+  border-radius: 2px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.freshness-metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.freshness-metric {
+  background: rgba(245,237,224,0.05);
+  border: 1px solid rgba(200,148,58,0.15);
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+}
+.freshness-metric .big { font-family: var(--font-serif); font-size: 36px; font-weight: 700; color: var(--gold-light); line-height: 1; }
+.freshness-metric .small { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: rgba(245,237,224,0.5); margin-top: 6px; font-weight: 500; }
+
+/* ── REVIEWS ── */
+.reviews-section {
+  padding: 100px 60px;
+  background: var(--parchment);
+}
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
+.review-card {
+  background: var(--cream);
+  border: 1px solid rgba(74,44,20,0.1);
+  border-radius: 6px;
+  padding: 32px;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.review-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(42,26,14,0.1); }
+.review-card::before {
+  content: '"';
+  font-family: var(--font-serif);
+  font-size: 80px;
+  color: rgba(200,148,58,0.15);
+  position: absolute;
+  top: 10px; right: 20px;
+  line-height: 1;
+}
+.stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
+.review-text { font-family: var(--font-serif); font-size: 16px; font-style: italic; color: var(--brown-mid); line-height: 1.7; margin-bottom: 20px; font-weight: 300; }
+.reviewer { display: flex; align-items: center; gap: 12px; }
+.reviewer-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--brown-light); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.reviewer-name { font-size: 13px; font-weight: 600; color: var(--brown-deep); }
+.reviewer-city { font-size: 11px; color: var(--brown-light); letter-spacing: 0.5px; }
+.review-tag { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-top: 16px; border-top: 1px solid rgba(74,44,20,0.08); padding-top: 14px; }
+
+/* ── BLOG ── */
+.blog-section { padding: 100px 60px; background: var(--cream2); }
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 64px; }
+.blog-card {
+  background: var(--cream);
+  border: 1px solid rgba(74,44,20,0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.blog-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(42,26,14,0.12); }
+.blog-thumb {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+}
+.blog-thumb.t1 { background: linear-gradient(135deg, #1a3d1a, #2d6628); }
+.blog-thumb.t2 { background: linear-gradient(135deg, #3d2010, #704020); }
+.blog-thumb.t3 { background: linear-gradient(135deg, #2a1a0e, #4a2c14); }
+.blog-body { padding: 24px; }
+.blog-cat { font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 10px; }
+.blog-title { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: var(--brown-deep); line-height: 1.3; margin-bottom: 10px; }
+.blog-excerpt { font-size: 13px; color: var(--brown-mid); line-height: 1.6; font-weight: 300; margin-bottom: 16px; }
+.blog-meta { font-size: 11px; color: var(--brown-light); display: flex; gap: 16px; align-items: center; }
+.blog-meta span::before { content: '· '; }
+.blog-meta span:first-child::before { content: ''; }
+.read-more { color: var(--forest); font-weight: 600; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: flex; align-items: center; gap: 6px; margin-top: 12px; transition: gap 0.2s; }
+.blog-card:hover .read-more { gap: 10px; }
+
+/* ── FAQ ── */
+.faq-section { padding: 100px 60px; background: var(--parchment); max-width: 800px; margin: 0 auto; }
+.faq-section .section-head { margin-bottom: 48px; }
+.faq-item {
+  border-bottom: 1px solid rgba(74,44,20,0.12);
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 22px 0;
+  text-align: left;
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--brown-deep);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: color 0.2s;
+}
+.faq-q:hover { color: var(--forest); }
+.faq-arrow { font-size: 18px; color: var(--gold); transition: transform 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-arrow { transform: rotate(45deg); }
+.faq-a {
+  font-size: 14px;
+  color: var(--brown-mid);
+  line-height: 1.8;
+  font-weight: 300;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+  padding-bottom: 0;
+}
+.faq-item.open .faq-a { max-height: 200px; padding-bottom: 20px; }
+
+/* ── CONTACT ── */
+.contact-section {
+  padding: 100px 60px;
+  background: var(--brown-deep);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-label { color: var(--gold) !important; }
+.contact-title { color: var(--cream); }
+.contact-desc { color: rgba(245,237,224,0.55); }
+.contact-methods { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+.contact-method {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(245,237,224,0.05);
+  border: 1px solid rgba(200,148,58,0.15);
+  padding: 18px 22px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: border-color 0.25s, background 0.25s;
+}
+.contact-method:hover { border-color: rgba(200,148,58,0.4); background: rgba(245,237,224,0.08); }
+.contact-method .cm-icon { font-size: 24px; }
+.contact-method .cm-text .top { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 3px; }
+.contact-method .cm-text .bottom { font-size: 14px; color: var(--cream); font-weight: 300; }
+.contact-form { display: flex; flex-direction: column; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.form-field label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+.form-field input, .form-field textarea, .form-field select {
+  background: rgba(245,237,224,0.05);
+  border: 1px solid rgba(200,148,58,0.2);
+  border-radius: 3px;
+  padding: 13px 16px;
+  font-size: 14px;
+  color: var(--cream);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  transition: border-color 0.25s;
+  outline: none;
+  resize: none;
+}
+.form-field input::placeholder, .form-field textarea::placeholder { color: rgba(245,237,224,0.3); }
+.form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--gold); }
+.form-field select { color: rgba(245,237,224,0.7); }
+.form-field select option { background: var(--brown-deep); }
+.btn-submit {
+  background: var(--gold);
+  color: var(--brown-deep);
+  border: none;
+  padding: 15px 32px;
+  font-size: 11.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.15s;
+  margin-top: 8px;
+  align-self: flex-start;
+}
+.btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+/* ── FOOTER ── */
+footer {
+  background: #1a0e06;
+  padding: 60px 60px 32px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(200,148,58,0.12);
+}
+.footer-brand .chinku { font-family: var(--font-serif); font-size: 28px; font-weight: 700; color: var(--cream); }
+.footer-brand .chai { font-family: var(--font-serif); font-size: 12px; font-weight: 300; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; }
+.footer-brand p { font-size: 13px; color: rgba(245,237,224,0.4); line-height: 1.7; margin-top: 14px; font-weight: 300; }
+.footer-col h5 { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 18px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a { font-size: 13px; color: rgba(245,237,224,0.5); text-decoration: none; font-weight: 300; transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--cream); }
+.footer-bottom {
+  padding-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-bottom p { font-size: 12px; color: rgba(245,237,224,0.3); font-weight: 300; }
+.footer-certifications { display: flex; gap: 12px; flex-wrap: wrap; }
+.cert-badge {
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: rgba(200,148,58,0.6);
+  border: 1px solid rgba(200,148,58,0.15);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+/* ── WA BUTTON ── */
+.wa-float {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 56px; height: 56px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  cursor: none;
+  z-index: 500;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  transition: transform 0.2s;
+  text-decoration: none;
+}
+.wa-float:hover { transform: scale(1.1); }
+
+/* ── ANIMATIONS ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up:nth-child(2) { transition-delay: 0.1s; }
+.fade-up:nth-child(3) { transition-delay: 0.2s; }
+.fade-up:nth-child(4) { transition-delay: 0.3s; }
+
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { height: 320px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .steps-grid::before { display: none; }
+  .story-section { grid-template-columns: 1fr; gap: 48px; }
+  .freshness-section { grid-template-columns: 1fr; }
+  .contact-section { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero-left, .shop-section, .how-section, .blog-section, .reviews-section, .freshness-section, .story-section, .contact-section, .footer-top { padding-left: 24px; padding-right: 24px; }
+  .shop-section, .how-section, .blog-section, .reviews-section { padding: 60px 24px; }
+  .products-grid, .reviews-grid, .blog-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .step-card { border-right: none; border-bottom: 1px solid rgba(74,44,20,0.1); padding: 24px 0; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .origin-strip { padding: 24px; flex-direction: column; align-items: flex-start; }
+  .faq-section { padding: 60px 24px; }
+  footer { padding: 40px 24px 24px; }
+  .hero-left { padding: 60px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curRing"></div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Direct from Assam & Dooars Tea Gardens</span>
+    <span>Freshly Packed — No Middlemen</span>
+    <span>Free Delivery on Orders Above ₹499</span>
+    <span>100% Natural · No Artificial Flavouring</span>
+    <span>FSSAI Certified · Safe for Your Family</span>
+    <span>Seedha Bagan Se Ghar Tak</span>
+    <span>14-Day Freshness Guarantee</span>
+    <span>WhatsApp Orders Available</span>
+    <span>Direct from Assam & Dooars Tea Gardens</span>
+    <span>Freshly Packed — No Middlemen</span>
+    <span>Free Delivery on Orders Above ₹499</span>
+    <span>100% Natural · No Artificial Flavouring</span>
+    <span>FSSAI Certified · Safe for Your Family</span>
+    <span>Seedha Bagan Se Ghar Tak</span>
+    <span>14-Day Freshness Guarantee</span>
+    <span>WhatsApp Orders Available</span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="logo-mark">
+    <span class="chinku">Chinku Chai</span>
+    <span class="chai">Est. 2023 · Assam</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#blog">Journal</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-cart">🛒 Cart (0)</div>
+    <a href="https://wa.me/91XXXXXXXXXX" class="btn-order">📲 Order on WhatsApp</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-line"></span>
+      <span class="eyebrow-text">Seedha Bagan Se · Directly from the Garden</span>
+    </div>
+    <h1 class="hero-title">
+      Asli Chai.<br>
+      <em>Asli Freshness.</em><br>
+      Seedha Aapke<br>Ghar Tak.
+    </h1>
+    <p class="hero-subtitle">From the mist-kissed gardens of Assam & Dooars</p>
+    <p class="hero-desc">Premium single-origin tea, harvested fresh from Assam and Dooars gardens, packed within 48 hours of processing, and delivered straight to your home. No blending. No stale stock. Just pure, honest chai.</p>
+    <div class="hero-ctas">
+      <a href="#shop" class="btn-primary">🍃 Shop Premium Teas</a>
+      <a href="#story" class="btn-secondary">Our Story →</a>
+    </div>
+    <div class="hero-badges">
+      <div class="hero-badge">
+        <span class="num">100%</span>
+        <span class="label">Single Origin</span>
+      </div>
+      <div class="badge-divider"></div>
+      <div class="hero-badge">
+        <span class="num">48h</span>
+        <span class="label">Farm to Pack</span>
+      </div>
+      <div class="badge-divider"></div>
+      <div class="hero-badge">
+        <span class="num">4.9★</span>
+        <span class="label">Customer Rating</span>
+      </div>
+      <div class="badge-divider"></div>
+      <div class="hero-badge">
+        <span class="num">2000+</span>
+        <span class="label">Happy Chai Lovers</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-visual-content">
+      <div class="origin-tag">
+        Assam & Dooars, India
+        <span>Grown at 1000–2000m altitude</span>
+      </div>
+      <div class="tea-vessel">🍵</div>
+      <div class="freshness-tag">
+        🌿 Packed within 48hrs of processing
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN STRIP -->
+<div class="origin-strip">
+  <div class="origin-item">
+    <div class="icon">🌱</div>
+    <div class="text">
+      <div class="top">Single Origin</div>
+      <div class="bottom">Traceable to exact garden</div>
+    </div>
+  </div>
+  <div class="origin-sep"></div>
+  <div class="origin-item">
+    <div class="icon">🚫</div>
+    <div class="text">
+      <div class="top">No Middlemen</div>
+      <div class="bottom">Direct from farmer to you</div>
+    </div>
+  </div>
+  <div class="origin-sep"></div>
+  <div class="origin-item">
+    <div class="icon">📦</div>
+    <div class="text">
+      <div class="top">48h Packing</div>
+      <div class="bottom">Freshness you can taste</div>
+    </div>
+  </div>
+  <div class="origin-sep"></div>
+  <div class="origin-item">
+    <div class="icon">🏅</div>
+    <div class="text">
+      <div class="top">FSSAI Certified</div>
+      <div class="bottom">Safe & quality assured</div>
+    </div>
+  </div>
+  <div class="origin-sep"></div>
+  <div class="origin-item">
+    <div class="icon">🔄</div>
+    <div class="text">
+      <div class="top">Freshness Guarantee</div>
+      <div class="bottom">14-day return policy</div>
+    </div>
+  </div>
+</div>
+
+<!-- SHOP -->
+<section class="shop-section" id="shop">
+  <div class="section-head">
+    <div class="section-label"><span class="line"></span> Our Collection</div>
+    <h2 class="section-title">Every Sip Tells a<br><em>Garden's Story</em></h2>
+    <p class="section-desc">Four exceptional teas. Four distinct characters. All freshly sourced from the finest gardens in Northeast India.</p>
+  </div>
+  <div class="products-grid">
+
+    <!-- Assam CTC -->
+    <div class="product-card fade-up">
+      <div class="product-img assam-ctc">
+        <div class="product-badge-wrap">
+          <span class="product-badge badge-top">Best Seller</span>
+          <span class="product-badge badge-fresh">Fresh Stock</span>
+        </div>
+        <div class="product-thumb">☕</div>
+      </div>
+      <div class="product-body">
+        <div class="product-region">Assam · CTC Grade</div>
+        <div class="product-name">Assam Bold CTC</div>
+        <div class="product-desc">The classic Indian morning chai. Strong, malty, amber-bright liquor with a full-bodied kick. Pairs perfectly with milk and jaggery.</div>
+        <div class="product-tags">
+          <span class="product-tag">Strong Brew</span>
+          <span class="product-tag">Malty</span>
+          <span class="product-tag">Morning Tea</span>
+        </div>
+        <div class="product-footer" style="margin-top:16px;">
+          <div class="product-price">₹299 <span class="per">/ 250g</span></div>
+          <button class="btn-add" onclick="addToWA('Assam Bold CTC - 250g @ ₹299')">🛒 Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assam Orthodox -->
+    <div class="product-card fade-up">
+      <div class="product-img assam-orth">
+        <div class="product-badge-wrap">
+          <span class="product-badge badge-top">Premium</span>
+        </div>
+        <div class="product-thumb">🍃</div>
+      </div>
+      <div class="product-body">
+        <div class="product-region">Assam · Orthodox</div>
+        <div class="product-name">Assam Orthodox Loose Leaf</div>
+        <div class="product-desc">Whole leaf, slow-rolled. Delicate malt with honey notes and a clean, lingering finish. Brewed without milk for a true connoisseur's experience.</div>
+        <div class="product-tags">
+          <span class="product-tag">Whole Leaf</span>
+          <span class="product-tag">Honey Notes</span>
+          <span class="product-tag">Sip Neat</span>
+        </div>
+        <div class="product-footer" style="margin-top:16px;">
+          <div class="product-price">₹449 <span class="per">/ 100g</span></div>
+          <button class="btn-add" onclick="addToWA('Assam Orthodox - 100g @ ₹449')">🛒 Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dooars Green -->
+    <div class="product-card fade-up">
+      <div class="product-img dooars-green">
+        <div class="product-badge-wrap">
+          <span class="product-badge badge-new">New Arrival</span>
+          <span class="product-badge badge-fresh">Fresh</span>
+        </div>
+        <div class="product-thumb">🌿</div>
+      </div>
+      <div class="product-body">
+        <div class="product-region">Dooars, West Bengal</div>
+        <div class="product-name">Dooars Green Tea</div>
+        <div class="product-desc">Crisp, grassy, and refreshingly light. Unoxidised leaves from the foothills of Bhutan. Antioxidant-rich and caffeine-mild.</div>
+        <div class="product-tags">
+          <span class="product-tag">Unoxidised</span>
+          <span class="product-tag">Antioxidants</span>
+          <span class="product-tag">Light Caffeine</span>
+        </div>
+        <div class="product-footer" style="margin-top:16px;">
+          <div class="product-price">₹399 <span class="per">/ 100g</span></div>
+          <button class="btn-add" onclick="addToWA('Dooars Green Tea - 100g @ ₹399')">🛒 Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Darjeeling -->
+    <div class="product-card fade-up">
+      <div class="product-img darjeeling">
+        <div class="product-badge-wrap">
+          <span class="product-badge badge-top">Rare</span>
+        </div>
+        <div class="product-thumb">✨</div>
+      </div>
+      <div class="product-body">
+        <div class="product-region">Darjeeling · First Flush</div>
+        <div class="product-name">Darjeeling First Flush</div>
+        <div class="product-desc">The champagne of teas. Harvested in spring, light floral notes, delicate muscatel character. A seasonal treasure in limited supply.</div>
+        <div class="product-tags">
+          <span class="product-tag">Seasonal</span>
+          <span class="product-tag">Muscatel</span>
+          <span class="product-tag">GI Tag</span>
+        </div>
+        <div class="product-footer" style="margin-top:16px;">
+          <div class="product-price">₹799 <span class="per">/ 50g</span></div>
+          <button class="btn-add" onclick="addToWA('Darjeeling First Flush - 50g @ ₹799')">🛒 Add</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div style="text-align:center;margin-top:48px;">
+    <a href="https://wa.me/91XXXXXXXXXX" class="btn-primary">📲 View Full Menu on WhatsApp</a>
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section class="story-section" id="story">
+  <div>
+    <div class="section-label story-label"><span class="line" style="background:var(--gold)"></span> Our Story</div>
+    <h2 class="section-title story-title">From a Small Garden<br><em>to Your Morning Cup</em></h2>
+    <div class="story-body">
+      <p>Chinku Chai was born from a simple frustration — <strong>why does the best Assam tea always end up exported abroad, while we drink leftover blends?</strong></p>
+      <p>We travelled to the tea gardens of Assam and the lush foothills of Dooars, built direct relationships with garden owners, and set up a small packing unit that processes and ships within 48 hours of harvest.</p>
+      <p>No brokers. No auction houses. No months of storage in dusty warehouses. <strong>Just fresh, honest tea, straight from the people who grew it to the people who love it.</strong></p>
+    </div>
+  </div>
+  <div class="story-right">
+    <div class="story-card fade-up">
+      <div class="sc-icon">🌄</div>
+      <h4>The Gardens We Work With</h4>
+      <p>We partner with 6 small and mid-sized family estates in Assam's Brahmaputra Valley and Dooars' Jalpaiguri district — selecting only gardens with sustainable, ethical practices.</p>
+      <div class="sc-detail">Assam · Dooars · Darjeeling</div>
+    </div>
+    <div class="story-card fade-up">
+      <div class="sc-icon">⏱️</div>
+      <h4>48-Hour Freshness Promise</h4>
+      <p>From plucking to packing in under 48 hours. We use nitrogen-flushed, food-grade pouches to lock in aroma, flavour, and colour for up to 18 months.</p>
+      <div class="sc-detail">Harvest → Pack → Ship</div>
+    </div>
+    <div class="story-card fade-up">
+      <div class="sc-icon">🤝</div>
+      <h4>Fair to Farmers, Honest to You</h4>
+      <p>We pay garden workers 20% above market rate. We charge you fairly. No middlemen means better quality at both ends of the chain.</p>
+      <div class="sc-detail">Farm to Cup Transparency</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-head centered">
+    <div class="section-label centered"><span class="line"></span> How It Works <span class="line"></span></div>
+    <h2 class="section-title" style="text-align:center;">From Leaf to Your<br><em>Morning Ritual</em></h2>
+    <p class="section-desc centered">We've eliminated every step that compromises freshness. Here's exactly how your tea gets from garden to cup.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card fade-up">
+      <div class="step-num">01</div>
+      <div class="step-icon">🌿</div>
+      <h4>Garden Harvest</h4>
+      <p>Two leaves and a bud, hand-plucked at peak season by experienced garden workers at our partner estates in Assam and Dooars.</p>
+    </div>
+    <div class="step-card fade-up">
+      <div class="step-num">02</div>
+      <div class="step-icon">🏭</div>
+      <h4>48h Processing & Packing</h4>
+      <p>Tea is processed (CTC, orthodox, or green) and packed in nitrogen-flushed, food-grade resealable pouches within 48 hours — never stored in bulk warehouses.</p>
+    </div>
+    <div class="step-card fade-up">
+      <div class="step-num">03</div>
+      <div class="step-icon">📦</div>
+      <h4>Direct Dispatch</h4>
+      <p>Your order is dispatched within 24 hours of placing it. We use premium courier partners to ensure safe, fast delivery across India.</p>
+    </div>
+    <div class="step-card fade-up">
+      <div class="step-num">04</div>
+      <div class="step-icon">☕</div>
+      <h4>Your Perfect Cup</h4>
+      <p>Brew, sip, and taste the difference. If you're not satisfied with the freshness in 14 days, we'll replace or refund — no questions asked.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FRESHNESS BANNER -->
+<section class="freshness-section">
+  <div>
+    <h2 class="freshness-title">Freshness Isn't a<br>Promise. It's Our<br><em>Entire Business Model.</em></h2>
+    <p class="freshness-body">Most tea brands buy in bulk, blend, store for months, and put a "best before" date hoping you won't notice. We don't. Every batch at Chinku Chai is traceable to a specific garden and harvest week.</p>
+    <div class="freshness-pills">
+      <span class="freshness-pill">🌿 Nitrogen Flushed Packaging</span>
+      <span class="freshness-pill">📍 Garden-Traceable Batches</span>
+      <span class="freshness-pill">🚫 No Artificial Preservatives</span>
+      <span class="freshness-pill">🔒 FSSAI Certified</span>
+    </div>
+  </div>
+  <div class="freshness-metrics">
+    <div class="freshness-metric"><div class="big">48h</div><div class="small">Harvest to Pack</div></div>
+    <div class="freshness-metric"><div class="big">18mo</div><div class="small">Shelf Life Preserved</div></div>
+    <div class="freshness-metric"><div class="big">6</div><div class="small">Partner Gardens</div></div>
+    <div class="freshness-metric"><div class="big">0</div><div class="small">Middlemen</div></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="section-head centered">
+    <div class="section-label centered"><span class="line"></span> Customer Love <span class="line"></span></div>
+    <h2 class="section-title" style="text-align:center;">2000+ Chai Lovers<br><em>Can't Be Wrong</em></h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Maine pehle kabhi aisa Assam chai nahi piya. Ekdum fresh aur mast flavour. Ghar mein sab ne puchha yeh kahan se liya!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">👩</div>
+        <div>
+          <div class="reviewer-name">Priya Sharma</div>
+          <div class="reviewer-city">Mumbai, Maharashtra</div>
+        </div>
+      </div>
+      <div class="review-tag">✦ Assam Bold CTC</div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"The Darjeeling First Flush is exceptional. I've had tea from fancy brands but this — this is what Darjeeling is supposed to taste like. Floral, clean, lingering."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">👨</div>
+        <div>
+          <div class="reviewer-name">Rohan Mehta</div>
+          <div class="reviewer-city">Pune, Maharashtra</div>
+        </div>
+      </div>
+      <div class="review-tag">✦ Darjeeling First Flush</div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Dooars Green Tea surprised me. It's smooth, light, and actually tastes like tea — not grass. The packaging was fresh and the dispatch was quick. Ordering again!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">👩</div>
+        <div>
+          <div class="reviewer-name">Meena Rajan</div>
+          <div class="reviewer-city">Bengaluru, Karnataka</div>
+        </div>
+      </div>
+      <div class="review-tag">✦ Dooars Green Tea</div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"WhatsApp order process was super smooth. I placed order at 9pm and got a confirmation within minutes. Delivered in 3 days. The Assam Orthodox is now my daily morning ritual."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">👨</div>
+        <div>
+          <div class="reviewer-name">Suresh Kumar</div>
+          <div class="reviewer-city">Delhi, NCR</div>
+        </div>
+      </div>
+      <div class="review-tag">✦ Assam Orthodox</div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Finally a brand that is honest about where their tea comes from. You can actually see the difference in colour and fragrance when you open the packet. Breathtaking aroma!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">👩</div>
+        <div>
+          <div class="reviewer-name">Ankita Joshi</div>
+          <div class="reviewer-city">Jaipur, Rajasthan</div>
+        </div>
+      </div>
+      <div class="review-tag">✦ Assam Bold CTC</div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★☆</div>
+      <p class="review-text">"Gifted the Premium Combo to my parents in Hyderabad. They loved it so much that now they order directly. My mom says it reminds her of her childhood in Assam."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">👨</div>
+        <div>
+          <div class="reviewer-name">Vikram Nair</div>
+          <div class="reviewer-city">Hyderabad, Telangana</div>
+        </div>
+      </div>
+      <div class="review-tag">✦ Premium Gift Combo</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG / JOURNAL -->
+<section class="blog-section" id="blog">
+  <div class="section-head">
+    <div class="section-label"><span class="line"></span> The Chai Journal</div>
+    <h2 class="section-title">Stories from the<br><em>Garden & Beyond</em></h2>
+  </div>
+  <div class="blog-grid">
+    <div class="blog-card fade-up">
+      <div class="blog-thumb t1">🌄</div>
+      <div class="blog-body">
+        <div class="blog-cat">Origin Stories</div>
+        <div class="blog-title">What Makes Assam Tea Different from the Rest of the World?</div>
+        <div class="blog-excerpt">The unique alluvial soil and tropical climate of the Brahmaputra Valley produce a tea character found nowhere else on earth — here's why.</div>
+        <div class="blog-meta"><span>Tea Culture</span><span>5 min read</span><span>April 2026</span></div>
+        <a href="#" class="read-more">Read More →</a>
+      </div>
+    </div>
+    <div class="blog-card fade-up">
+      <div class="blog-thumb t2">☕</div>
+      <div class="blog-body">
+        <div class="blog-cat">Brewing Guide</div>
+        <div class="blog-title">The Perfect Assam Chai — Milk Ratio, Water Temp & Timing</div>
+        <div class="blog-excerpt">Our garden partner's head tea-maker shares the exact method to brew a cup that brings out every note in our Assam CTC.</div>
+        <div class="blog-meta"><span>Recipes</span><span>3 min read</span><span>March 2026</span></div>
+        <a href="#" class="read-more">Read More →</a>
+      </div>
+    </div>
+    <div class="blog-card fade-up">
+      <div class="blog-thumb t3">🌿</div>
+      <div class="blog-body">
+        <div class="blog-cat">Sustainability</div>
+        <div class="blog-title">How Buying Direct Changes the Lives of Tea Garden Workers</div>
+        <div class="blog-excerpt">Every cup you buy from Chinku Chai means a garden worker gets paid fairly. Here's the math, the people, and the difference it makes.</div>
+        <div class="blog-meta"><span>Impact</span><span>6 min read</span><span>Feb 2026</span></div>
+        <a href="#" class="read-more">Read More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq" style="max-width:100%;padding:100px 60px;background:var(--parchment);">
+  <div class="section-head">
+    <div class="section-label"><span class="line"></span> FAQ</div>
+    <h2 class="section-title">Common Questions,<br><em>Honest Answers</em></h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How do I place an order? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Simply click "Order on WhatsApp" or the product "Add" button — it opens a WhatsApp chat with your cart prefilled. We'll confirm availability, share the payment link, and dispatch within 24 hours.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How fresh is your tea really? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Very fresh. We pack within 48 hours of processing at the garden. Each pouch has a packed-on date so you can verify. Most orders reach you within 5–7 days of harvest — that's fresher than anything you'll find in a supermarket or online marketplace.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Do you offer bulk or subscription orders? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Yes! We offer monthly subscriptions with 10% off and priority packing. We also supply bulk orders (1kg+) for offices, cafes, and corporate gifting. Contact us on WhatsApp for bulk pricing.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What if I don't like the tea? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">We have a 14-day freshness guarantee. If you find the tea unsatisfactory within 14 days of delivery, message us on WhatsApp with a photo and we'll either replace the batch or refund fully — no questions asked.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Do you ship across India? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Yes — all 28 states and 8 union territories. Free shipping on orders above ₹499. Standard delivery is 3–7 business days. Express delivery (1–3 days) is available in major metros.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Are your teas blended or single origin? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Strictly single origin. Each product in our range comes from one specific garden and one specific harvest lot. We never blend across gardens or seasons — it would compromise the character that makes each tea unique.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Is Chinku Chai FSSAI certified? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Yes. We are fully FSSAI licensed and compliant. Our packing unit is routinely audited for hygiene and quality standards. We also have zero artificial additives, flavourings, or preservatives in any of our products.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div>
+    <div class="section-label contact-label"><span class="line" style="background:var(--gold)"></span> Get in Touch</div>
+    <h2 class="section-title contact-title">We'd Love to Hear<br><em style="color:var(--gold-light)">from You</em></h2>
+    <p class="section-desc contact-desc" style="max-width:100%;">Whether you want to place a bulk order, have a question about sourcing, or just want to talk about tea — we're here.</p>
+    <div class="contact-methods">
+      <a href="https://wa.me/91XXXXXXXXXX" class="contact-method">
+        <span class="cm-icon">💬</span>
+        <div class="cm-text">
+          <div class="top">WhatsApp (Fastest)</div>
+          <div class="bottom">+91 XXXXX XXXXX</div>
+        </div>
+      </a>
+      <a href="mailto:hello@chinkuchai.in" class="contact-method">
+        <span class="cm-icon">✉️</span>
+        <div class="cm-text">
+          <div class="top">Email</div>
+          <div class="bottom">hello@chinkuchai.in</div>
+        </div>
+      </a>
+      <a href="#" class="contact-method">
+        <span class="cm-icon">📸</span>
+        <div class="cm-text">
+          <div class="top">Instagram</div>
+          <div class="bottom">@chinkuchai</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <form class="contact-form" onsubmit="handleContact(event)">
+    <div class="form-row">
+      <div class="form-field">
+        <label>Your Name</label>
+        <input type="text" placeholder="Ramesh Sharma" required>
+      </div>
+      <div class="form-field">
+        <label>Phone / WhatsApp</label>
+        <input type="tel" placeholder="+91 98765 43210" required>
+      </div>
+    </div>
+    <div class="form-field">
+      <label>Email</label>
+      <input type="email" placeholder="ramesh@email.com">
+    </div>
+    <div class="form-field">
+      <label>I'm Interested In</label>
+      <select>
+        <option>Placing a personal order</option>
+        <option>Bulk / Corporate order</option>
+        <option>Monthly subscription</option>
+        <option>Gifting packs</option>
+        <option>Partnership / Reseller</option>
+        <option>Something else</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label>Message</label>
+      <textarea rows="4" placeholder="Tell us what you're looking for..."></textarea>
+    </div>
+    <button type="submit" class="btn-submit">Send Message →</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="chinku">Chinku Chai</div>
+      <div class="chai">Est. 2023 · Assam, India</div>
+      <p>Premium single-origin teas from Assam and Dooars, delivered fresh to your home. No middlemen, no compromises.</p>
+      <div style="margin-top:20px;display:flex;gap:12px;">
+        <a href="#" style="color:var(--gold);font-size:20px;text-decoration:none;">📸</a>
+        <a href="#" style="color:var(--gold);font-size:20px;text-decoration:none;">💬</a>
+        <a href="#" style="color:var(--gold);font-size:20px;text-decoration:none;">▶️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Shop</h5>
+      <ul>
+        <li><a href="#">Assam Bold CTC</a></li>
+        <li><a href="#">Assam Orthodox</a></li>
+        <li><a href="#">Dooars Green Tea</a></li>
+        <li><a href="#">Darjeeling First Flush</a></li>
+        <li><a href="#">Gift Packs</a></li>
+        <li><a href="#">Subscriptions</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Our Gardens</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">The Chai Journal</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Help</h5>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Return Policy</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Chinku Chai · All rights reserved · Made in India 🇮🇳</p>
+    <div class="footer-certifications">
+      <span class="cert-badge">FSSAI Licensed</span>
+      <span class="cert-badge">Single Origin</span>
+      <span class="cert-badge">48h Fresh</span>
+      <span class="cert-badge">No Middlemen</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/91XXXXXXXXXX?text=Hi! I want to order Chinku Chai 🍵" class="wa-float" title="Order on WhatsApp">💬</a>
+
+<script>
+// ── CURSOR ──
+const cur = document.getElementById('cur');
+const ring = document.getElementById('curRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animCursor() {
+  cur.style.left = (mx - 6) + 'px';
+  cur.style.top  = (my - 6) + 'px';
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = (rx - 18) + 'px';
+  ring.style.top  = (ry - 18) + 'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+document.querySelectorAll('a,button,.product-card,.blog-card,.review-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.style.width = '20px'; cur.style.height = '20px'; ring.style.transform = 'scale(1.5)'; });
+  el.addEventListener('mouseleave', () => { cur.style.width = '12px'; cur.style.height = '12px'; ring.style.transform = 'scale(1)'; });
+});
+
+// ── FAQ ──
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ── WA CART ──
+function addToWA(product) {
+  const msg = encodeURIComponent('Hi! I want to order:\n\n• ' + product + '\n\nPlease confirm availability and payment details. 🍵');
+  window.open('https://wa.me/91XXXXXXXXXX?text=' + msg, '_blank');
+}
+
+// ── CONTACT FORM ──
+function handleContact(e) {
+  e.preventDefault();
+  const name = e.target.querySelector('input[type=text]').value;
+  const phone = e.target.querySelector('input[type=tel]').value;
+  const interest = e.target.querySelector('select').value;
+  const msg = encodeURIComponent(`Hi! I'm ${name} (${phone}).\n\nI'm interested in: ${interest}\n\nI submitted the contact form on your website.`);
+  window.open('https://wa.me/91XXXXXXXXXX?text=' + msg, '_blank');
+}
+
+// ── SCROLL ANIMATIONS ──
+const fadeEls = document.querySelectorAll('.fade-up');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.15 });
+fadeEls.forEach(el => observer.observe(el));
+
+// ── ACTIVE NAV ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--brown-deep)' : '';
+  });
+});
+</script>
+</body>
+</html>
