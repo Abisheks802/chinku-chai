@@ -37,29 +37,6 @@ body {
   cursor: none;
 }
 
-/* ── CUSTOM CURSOR ── */
-.cursor {
-  width: 12px; height: 12px;
-  background: var(--gold);
-  border-radius: 50%;
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.15s ease, width 0.2s, height 0.2s;
-  mix-blend-mode: multiply;
-}
-.cursor-ring {
-  width: 36px; height: 36px;
-  border: 1.5px solid var(--gold);
-  border-radius: 50%;
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 9998;
-  transition: all 0.25s ease;
-  opacity: 0.6;
-}
 
 /* ── NOISE OVERLAY ── */
 body::before {
