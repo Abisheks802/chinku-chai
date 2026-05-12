@@ -940,19 +940,20 @@ footer {
   border: none;
 }
 
-.hamburger span {
+..hamburger span {
   display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--brown-deep);        /* dark lines on light navbar */
-  border-radius: 2px;                   /* optional: softens the lines slightly */
+  width: 26px;          /* slightly wider for better visibility */
+  height: 2.5px;        /* slightly thicker */
+  background: #2C1A0E;  /* deep dark brown — hardcoded, won't blend */
+  border-radius: 2px;
   transition: all 0.3s;
 }
 
-/* If your navbar background is dark or brown-toned */
 @media (prefers-color-scheme: dark) {
   .hamburger span {
-    background: var(--cream);            /* light lines on dark navbar */
+    background: #F5ECD7; /* cream for dark mode */
+  }
+;            /* light lines on dark navbar */
   }
 }
 
