@@ -942,16 +942,14 @@ footer {
 
 .hamburger span {
   display: block;
-  width: 26px;          /* slightly wider for better visibility */
-  height: 2.5px;        /* slightly thicker */
-  background: #2C1A0E;  /* deep dark brown — hardcoded, won't blend */
+  width: 26px;
+  height: 2.5px;
+  background: #2C1A0E !important;  /* force dark brown always */
   border-radius: 2px;
   transition: all 0.3s;
 }
 
-@media (prefers-color-scheme: dark) {
-  .hamburger span {
-    background: #F5ECD7; /* cream for dark mode */
+
   }
 ;            /* light lines on dark navbar */
   }
